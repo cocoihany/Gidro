@@ -1,0 +1,26 @@
+package com.malagasys.client.nav;
+
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.malagasys.client.ClientFactory;
+
+final class Place3Activity extends AbstractActivity implements NavView.Presenter{
+	private ClientFactory factory;
+	
+	public Place3Activity(ClientFactory factory) {
+		this.factory = factory;
+	}
+	
+	public void goTo(Place place) {
+	    this.factory.placeController().goTo(place);
+	}
+
+	public void start(AcceptsOneWidget panel, EventBus eventBus) {
+		NavView view = factory.navView();
+		view.setPresenter(this);
+        view.setText("Place3");
+		panel.setWidget(view);
+	}
+}

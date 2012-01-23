@@ -1,0 +1,46 @@
+package com.malagasys.client;
+
+import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.malagasys.client.nav.NavActivityMapper;
+import com.malagasys.client.top.TopActivityMapper;
+
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+public class JCD implements EntryPoint {
+	
+	/**
+	 * This is the entry point method.
+	 */
+	public void onModuleLoad() {
+	    ClientFactory clientFactory = GWT.create(ClientFactory.class);
+        EventBus eventBus = clientFactory.eventBus();
+        PlaceController placeController = clientFactory.placeController();
+        Main main = new Main();
+	    
+        //Top component
+        ActivityMapper activityMapper = new TopActivityMapper(clientFactory);
+        ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);
+        activityManager.setDisplay(main.getTop());
+        
+        //Nav Component
+        ActivityMapper navActivityMapper = new NavActivityMapper(clientFactory);
+        ActivityManager navActivityManager = new ActivityManager(navActivityMapper, eventBus);
+        navActivityManager.setDisplay(main.getNavigation());
+        
+        // Start PlaceHistoryHandler with our PlaceHistoryMapper
+        AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
+        PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
+        historyHandler.register(placeController, eventBus, NamedPlace.PLACE1);
+	    
+		RootLayoutPanel.get().add(main);
+		historyHandler.handleCurrentHistory();
+	}
+}

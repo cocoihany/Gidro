@@ -1,0 +1,35 @@
+package com.malagasys.client.top;
+
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.malagasys.client.ClientFactory;
+import com.malagasys.client.NamedPlace;
+
+final class Place2Activity extends AbstractActivity implements
+        TopView.Presenter {
+    private final TopView view;
+    
+    private final ClientFactory factory;
+
+    public Place2Activity(ClientFactory factory) {
+        this.view = factory.topView();
+        this.factory = factory;
+    }
+
+    public void goTo(Place place) {
+        this.factory.placeController().goTo(place);
+    }
+
+    public void start(AcceptsOneWidget panel, EventBus eventBus) {
+        view.setPresenter(this);
+        view.setText("Place2");
+        view.setBackgroud("green");
+        panel.setWidget(view);
+    }
+    
+    public void onNextClicked() {
+        goTo(NamedPlace.PLACE3);
+    }
+}

@@ -1,0 +1,47 @@
+package com.malagasys.client;
+
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceTokenizer;
+
+public class NamedPlace extends Place {
+    public enum TYPE {
+        PLACE1,
+        PLACE2,
+        PLACE3,
+        UNKNOWN,
+    };
+    
+    public final static NamedPlace PLACE1 = new NamedPlace(TYPE.PLACE1.name());
+    
+    public final static NamedPlace PLACE2 = new NamedPlace(TYPE.PLACE2.name());
+    
+    public final static NamedPlace PLACE3 = new NamedPlace(TYPE.PLACE3.name());
+    
+    public final static NamedPlace UNKNOWN = new NamedPlace(TYPE.UNKNOWN.name());
+    
+    private String name;
+
+    private NamedPlace(String name) {
+        this.name = name;
+        Enum.valueOf(TYPE.class, this.name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static class Tokenizer implements PlaceTokenizer<NamedPlace> {
+
+        public NamedPlace getPlace(String token) {
+            try {
+                return new NamedPlace(token);
+            } catch (Exception ex) {
+                return new NamedPlace(TYPE.UNKNOWN.name());
+            }
+        }
+
+        public String getToken(final NamedPlace place) {
+            return place.getName();
+        }
+    }
+}

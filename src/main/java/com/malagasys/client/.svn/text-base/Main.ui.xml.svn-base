@@ -1,0 +1,23 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<g:DockLayoutPanel unit='PX'>
+	   <g:north size='50'>
+            <g:SimplePanel ui:field='top'>
+                <g:Label>Top</g:Label>
+            </g:SimplePanel>	          
+		</g:north>
+		
+		<g:west size='200'>
+            <g:SimplePanel ui:field='navigation'>
+                <g:Label>Navigation</g:Label>
+            </g:SimplePanel>              
+		</g:west>
+		
+		<g:center>
+            <g:SimplePanel ui:field='body'>
+                <g:Label>Center</g:Label>
+            </g:SimplePanel>              
+		</g:center>
+	</g:DockLayoutPanel>
+</ui:UiBinder>

@@ -1,0 +1,38 @@
+package com.malagasys.client;
+
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.ResettableEventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.place.shared.PlaceController;
+import com.malagasys.client.nav.NavView;
+import com.malagasys.client.nav.NavViewImpl;
+import com.malagasys.client.top.TopView;
+import com.malagasys.client.top.TopViewImpl;
+
+public class ClientFactoryImpl implements ClientFactory {
+    
+    private TopView topView = new TopViewImpl();
+    
+    private NavView navView = new NavViewImpl();
+    
+    private EventBus evtBus = new ResettableEventBus(new SimpleEventBus());
+    
+    private final PlaceController placeController = new PlaceController(evtBus);
+
+    public TopView topView() {
+        return topView;
+    }
+
+    public EventBus eventBus() {
+        return evtBus;
+    }
+
+    public PlaceController placeController() {
+        return placeController;
+    }
+
+	public NavView navView() {
+		return navView;
+	}
+
+}

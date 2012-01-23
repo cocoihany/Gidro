@@ -1,0 +1,16 @@
+package com.malagasys.client;
+
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.PlaceController;
+import com.malagasys.client.nav.NavView;
+import com.malagasys.client.top.TopView;
+
+public interface ClientFactory {
+	TopView topView();
+	
+	NavView navView();
+	
+	EventBus eventBus();
+	
+	PlaceController placeController();
+}

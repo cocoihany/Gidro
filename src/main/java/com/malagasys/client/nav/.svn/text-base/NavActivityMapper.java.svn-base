@@ -1,0 +1,32 @@
+package com.malagasys.client.nav;
+
+import com.google.gwt.activity.shared.Activity;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.place.shared.Place;
+import com.malagasys.client.ClientFactory;
+import com.malagasys.client.NamedPlace;
+
+public class NavActivityMapper implements ActivityMapper {
+    
+    private ClientFactory factory;
+    
+    public NavActivityMapper(ClientFactory factory) {
+        this.factory = factory;
+    }
+
+    public Activity getActivity(Place place) {
+        if (place instanceof NamedPlace) {
+            NamedPlace pl = (NamedPlace) place;
+            if (pl.getName().equals(NamedPlace.TYPE.PLACE1.name())) {
+                return new Place1Activity(this.factory);
+            } else if (pl.getName().equals(NamedPlace.TYPE.PLACE2.name())) {
+                return new Place2Activity(this.factory);
+            } else if (pl.getName().equals(NamedPlace.TYPE.PLACE3.name())) {
+                return new Place3Activity(this.factory);
+            }
+        }
+        
+        return null;
+    }
+
+}
