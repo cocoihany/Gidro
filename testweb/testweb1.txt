@@ -1,2 +1,1 @@
-
-ajout de la 2eme ligne a partir de console
+Ceci est un test via le browser directement
